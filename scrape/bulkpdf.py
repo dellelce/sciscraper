@@ -45,17 +45,18 @@ class BulkPDFScraper:
         with change_dir(self.research_dir):
             sleep(1)
             with suppress(HTTPError, RequestException):
-                response = self.sessions.post(
-                    url=self.downloader_url, data=self.payload
-                )
+                response = self.sessions.post(url=self.downloader_url,
+                                              data=self.payload)
                 response.raise_for_status()
                 logger.info(response.status_code)
                 soup = BeautifulSoup(response.text, "lxml")
                 links: list[str] = [
                     item["onclick"].split("=")[1].strip("'")  # type: ignore
-                    for item in soup.select("button[onclick^='location.href=']")
+                    for item in soup.select(
+                        "button[onclick^='location.href=']")
                 ]
-                yield from (self.enrich_scrape(search_text, link) for link in links)
+                yield from (self.enrich_scrape(search_text, link)
+                            for link in links)
 
     def enrich_scrape(self, search_text: str, link: str) -> None:
         """enrich_scrape goes to, and downloads, the isolated download link.
@@ -69,9 +70,9 @@ class BulkPDFScraper:
         paper_url = f"{link}=true"
         paper_title = f'{self.date}_{search_text.replace("/","")}.pdf'
         sleep(1)
-        paper_content = (
-            self.sessions.get(paper_url, stream=True, allow_redirects=True)
-        ).content
+        paper_content = (self.sessions.get(paper_url,
+                                           stream=True,
+                                           allow_redirects=True)).content
         with open("temp_file.txt", "wb") as _tempfile:
             _tempfile.write(paper_content)
         with open(paper_title, "wb") as file:

@@ -14,6 +14,7 @@ class Style(Enum):
 
 
 class CitationGenerator:
+
     def __init__(
         self,
         doi: str,
@@ -38,8 +39,6 @@ class CitationGenerator:
             logger.debug(request.status_code)
             return request.text
         except (HTTPError) as http_error:
-            logger.error(
-                f"{http_error}occurred while generating the citation."
-                f"Status Code: {request.status_code}"
-                "Proceeding to next item in sequence."
-            )
+            logger.error(f"{http_error}occurred while generating the citation."
+                         f"Status Code: {request.status_code}"
+                         "Proceeding to next item in sequence.")

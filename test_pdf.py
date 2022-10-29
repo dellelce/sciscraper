@@ -4,6 +4,7 @@ from scrape.textscraper import compute_filtered_tokens
 
 
 class TestPdfScraper(unittest.TestCase):
+
     def test_filtered_tokens_empty(self):
         self.assertEqual(len({*compute_filtered_tokens([])}), 0)
 

@@ -13,7 +13,8 @@ from scrape.docscraper import DocScraper
 from scrape.jsonscraper import WebScraper
 from scrape.utils import logger
 
-SerializationStrategyFunction = Callable[[str|pd.DataFrame],Iterable[Any]]
+SerializationStrategyFunction = Callable[[str | pd.DataFrame], Iterable[Any]]
+
 
 @dataclass
 class SciScraper:
@@ -23,15 +24,16 @@ class SciScraper:
     logger: logging.Logger = logger
     verbose_logging: bool = False
 
-    def run(self, target: str|pd.DataFrame) -> pd.DataFrame:
+    def run(self, target: str | pd.DataFrame) -> pd.DataFrame:
         search_terms = self.serializer(target)
         data = (self.scraper.scrape(term) for term in tqdm(search_terms))
         data = (term for term in data if term != None)
         logger.debug(data)
-        data = list(map(asdict,data))
+        data = list(map(asdict, data))
         logger.debug(data)
         dataframe = pd.DataFrame(data)
         return dataframe
 
     def logging_level(self):
-        return logger.setLevel(10) if self.verbose_logging else logger.setLevel(20)
+        return logger.setLevel(
+            10) if self.verbose_logging else logger.setLevel(20)

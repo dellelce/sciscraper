@@ -23,7 +23,8 @@ def change_dir(destination: str):
     finally:
         chdir(cwd)
 
-def export_data(dataframe: pd.DataFrame, export_dir: str | None=None):
+
+def export_data(dataframe: pd.DataFrame, export_dir: str | None = None):
     """Export data to the specified export directory.
     If it's a dataframe, then it returns a .csv file.
     """
@@ -33,7 +34,9 @@ def export_data(dataframe: pd.DataFrame, export_dir: str | None=None):
         with change_dir(export_dir):
             print_id = random.randint(0, 100)
             export_name = f"{date_}_sciscraper_{print_id}.csv"
-            logger.info(f"A spreadsheet was exported as {export_name} in {export_dir}.")
+            logger.info(
+                f"A spreadsheet was exported as {export_name} in {export_dir}."
+            )
             if isinstance(dataframe, pd.DataFrame):
                 dataframe.to_csv(export_name)
 
