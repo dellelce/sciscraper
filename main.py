@@ -4,8 +4,7 @@ from time import perf_counter
 from scrape.config import read_config
 from scrape.docscraper import DocScraper
 from scrape.fetch import SciScraper
-from scrape.jsonscraper import (DIMENSIONS_AI_KEYS, SEMANTIC_SCHOLAR_KEYS,
-                                WebScraper)
+from scrape.jsonscraper import DIMENSIONS_AI_KEYS, SEMANTIC_SCHOLAR_KEYS, WebScraper
 from scrape.log import logger
 from scrape.serials import SERIALIZERS
 from scrape.utils import export_data
@@ -37,7 +36,7 @@ class SciScraper_Prefabs(Enum):
         scraper=Scrapers.SUMMARY.value)
 
 
-#Common Scrapers
+# Common Scrapers
 scicraper = SciScraper_Prefabs.SCRAPE_DIRECTORY.value
 dimension = SciScraper_Prefabs.SCRAPE_DIMENSIONS_AI.value
 abstracts = SciScraper_Prefabs.GET_ABSTACTS_FROM_DATAFRAME.value

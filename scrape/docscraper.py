@@ -28,7 +28,7 @@ class Wordscore:
     total_len: int
     formatted_worscore: str = ""
 
-    def calc_wordscore(self):  #odds ratio
+    def calc_wordscore(self):  # odds ratio
         weight: float = 0.75
         pos_odds: float = self.pos_part / self.pos_chances
         neg_odds: float = self.neg_part / self.neg_chances
@@ -77,9 +77,8 @@ class DocScraper:
             return {*unstemmed}
 
     def scrape(self, search_text: str) -> DocumentResult | None:
-        tokgen = self.extract_text_from_pdf(
-            search_text) if self.is_pdf else self.simple_text_clean(
-                search_text)
+        tokgen = (self.extract_text_from_pdf(search_text)
+                  if self.is_pdf else self.simple_text_clean(search_text))
         bycatch_size: int = len(self.bycatch_words)
         target_size: int = len(self.target_words)
         for tokens in tokgen:
@@ -118,6 +117,6 @@ class DocScraper:
         logger.info(search_text)
         manuscripts = search_text.strip().lower()
         logger.info(manuscripts)
-        draft = (manuscripts.split(" "))
+        draft = manuscripts.split(" ")
         logger.info(draft)
         yield draft

@@ -17,7 +17,7 @@ DIMENSIONS_AI_KEYS = {
     "times_cited": "times_cited",
     "author_list": "author_list",
     "citations": "cited_dimensions_ids",
-    "keywords": "mesh_terms"
+    "keywords": "mesh_terms",
 }
 
 SEMANTIC_SCHOLAR_KEYS = {
@@ -30,7 +30,7 @@ SEMANTIC_SCHOLAR_KEYS = {
     "times_cited": "citationCount",
     "author_list": "authors",
     "citations": "citations",
-    "keywords": "s2FieldsOfStudy"
+    "keywords": "s2FieldsOfStudy",
 }
 
 
@@ -84,7 +84,7 @@ class WebScraper:
             return scrape
 
     def create_querystring(self, search_text: str):
-        self.querystring = {
+        self.querystring = ({
             "or_subset_publication_citations": search_text
         } if self.query_subset_citations else {
             "search_mode":
@@ -95,4 +95,4 @@ class WebScraper:
             "kws",
             "search_field":
             "doi" if search_text.startswith("10") else "text_search",
-        }
+        })

@@ -48,9 +48,10 @@ def serialize_from_series(target: pd.DataFrame,
 
 
 def serialize_from_array(
-        target: pd.DataFrame,
-        target_column_x: str = "cited_dimensions_ids",
-        target_column_y: str = "title") -> tuple[list[str], list[str]]:
+    target: pd.DataFrame,
+    target_column_x: str = "cited_dimensions_ids",
+    target_column_y: str = "title",
+) -> tuple[list[str], list[str]]:
     """serialize_from_array reads a pandas DataFrame,
     takes the target_x param from the result of a prior fetch_terms_from_doi method
     scrapes the dimensions.ai API for each listed pub_id for each paper, and returns
@@ -80,5 +81,5 @@ SERIALIZERS = {
     "DOI": serialize_from_csv,
     "REFERENCES": serialize_from_array,
     "TITLE_CSV": partial(serialize_from_csv, column="Name"),
-    "DOI_SERIES": partial(serialize_from_series, column="doi")
+    "DOI_SERIES": partial(serialize_from_series, column="doi"),
 }
